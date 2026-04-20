@@ -3,16 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Облік товарів - Головна" Height="450" Width="800"
         MinWidth="400" MinHeight="300" WindowStartupLocation="CenterScreen">
-    <StackPanel Margin="20">
-        <TextBlock Text="Система обліку товарів" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="180" Background="#ECEFF1">
+            <TextBlock Text="Меню" FontSize="18" FontWeight="SemiBold" Margin="10,20,10,20" HorizontalAlignment="Center"/>
+            <Button Content="📦 Інвентар" Click="NavInventory_Click" Margin="10,5" Height="40"/>
+            <Button Content="➕ Додати товар" Click="NavAdd_Click" Margin="10,5" Height="40"/>
+            <Button Content="⚙ Налаштування" Margin="10,5" Height="40"/>
+        </StackPanel>
 
-        <Label Content="Назва товару:"/>
-        <TextBox x:Name="ProductNameInput" Margin="0,5" Height="25"/>
-
-        <Label Content="Ціна:"/>
-        <TextBox x:Name="ProductPriceInput" Margin="0,5" Height="25"/>
-
-        <Button x:Name="AddButton" Content="Додати товар" Click="AddButton_Click" Height="35" Margin="0,15,0,5"/>
-        <Button x:Name="ClearButton" Content="Очистити" Click="ClearButton_Click" Height="35"/>
-    </StackPanel>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </DockPanel>
 </Window>
