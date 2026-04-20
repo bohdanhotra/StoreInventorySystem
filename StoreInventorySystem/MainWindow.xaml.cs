@@ -20,5 +20,15 @@ namespace StoreInventorySystem
         {
             InitializeComponent();
         }
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Товар {ProductNameInput.Text} додано!"); 
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProductNameInput.Clear();
+            ProductPriceInput.Clear();
+        }
     }
 }
