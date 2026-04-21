@@ -1,12 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace StoreInventorySystem.Models
 {
-    internal class Product
+    public class Product : INotifyPropertyChanged
     {
+        private int id;
+        private string name;
+        private decimal price;
+        private int quantity;
+
+        public int Id
+        {
+            get => id;
+            set { id = value; OnPropertyChanged(); }
+        }
+
+        public string Name
+        {
+            get => name;
+            set { name = value; OnPropertyChanged(); }
+        }
+
+        public decimal Price
+        {
+            get => price;
+            set { price = value; OnPropertyChanged(); }
+        }
+
+        public int Quantity
+        {
+            get => quantity;
+            set { quantity = value; OnPropertyChanged(); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
