@@ -15,9 +15,10 @@
                 <TextBlock x:Name="UserRoleText" Text="Адміністратор" Foreground="White" HorizontalAlignment="Center" FontWeight="Bold"/>
                 <Separator Margin="0,20" Background="#55FFFFFF"/>
 
-                <Button Content="🏠 Головна" Click="NavHome_Click" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="📦 Товари" Click="NavInventory_Click" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="📊 Звіти" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="🏠 Головна" Click="NavHome_Click" />
+                <Button Content="📦 Товари" Click="NavInventory_Click" />
+                <Button Content="📊 Звіти" Click="NavReports_Click" />
+                <Button Content="📊 Add" Click="NavAdd_Click" />
 
                 <Button Content="Logout" Click="Logout_Click" VerticalAlignment="Bottom" Margin="0,100,0,0"/>
             </StackPanel>

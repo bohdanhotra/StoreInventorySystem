@@ -5,39 +5,24 @@ namespace StoreInventorySystem.Models
 {
     public class Product : INotifyPropertyChanged
     {
-        private int id;
-        private string name;
-        private decimal price;
-        private int quantity;
+        private string _id;
+        private string _name;
+        private string _category;
+        private decimal _price;
+        private int _quantity;
+        private string _imagePath;
+        private string _description;
 
-        public int Id
-        {
-            get => id;
-            set { id = value; OnPropertyChanged(); }
-        }
-
-        public string Name
-        {
-            get => name;
-            set { name = value; OnPropertyChanged(); }
-        }
-
-        public decimal Price
-        {
-            get => price;
-            set { price = value; OnPropertyChanged(); }
-        }
-
-        public int Quantity
-        {
-            get => quantity;
-            set { quantity = value; OnPropertyChanged(); }
-        }
+        public string Id { get => _id; set { _id = value; OnPropertyChanged(); } }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
+        public string Category { get => _category; set { _category = value; OnPropertyChanged(); } }
+        public decimal Price { get => _price; set { _price = value; OnPropertyChanged(); } }
+        public int Quantity { get => _quantity; set { _quantity = value; OnPropertyChanged(); } }
+        public string ImagePath { get => _imagePath; set { _imagePath = value; OnPropertyChanged(); } }
+        public string Description { get => _description; set { _description = value; OnPropertyChanged(); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
+        protected void OnPropertyChanged([CallerMemberName] string prop = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

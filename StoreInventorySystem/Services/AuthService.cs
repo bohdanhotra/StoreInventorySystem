@@ -56,7 +56,10 @@ namespace StoreInventorySystem.Services
             }
             return false;
         }
-
+        public static void Logout()
+        {
+            CurrentUser = null;
+        }
         public static bool Register(string username, string password)
         {
             if (_users.Any(u => u.Username == username)) return false;

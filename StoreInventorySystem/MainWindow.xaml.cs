@@ -8,7 +8,7 @@ namespace StoreInventorySystem
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Views.WelcomePage()); 
+            MainFrame.Navigate(new Views.MainDashboardPage()); 
         }
 
         public void NavigateToHome()

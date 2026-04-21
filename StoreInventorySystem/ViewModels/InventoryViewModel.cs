@@ -1,20 +1,33 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.Linq;
 using StoreInventorySystem.Models;
+using StoreInventorySystem.Services;
+using StoreInventorySystem.Commands;
 
 namespace StoreInventorySystem.ViewModels
 {
     public class InventoryViewModel
     {
         public ObservableCollection<Product> Products { get; set; }
+        public ICommand DeleteCommand { get; }
 
         public InventoryViewModel()
         {
-            Products = new ObservableCollection<Product>
+            // Завантажуємо список товарів із нашого сервісу (з JSON файлу)
+            var loadedProducts = ProductService.LoadProducts();
+            Products = new ObservableCollection<Product>(loadedProducts);
+
+            // Команда видалення товару
+            DeleteCommand = new RelayCommand(obj =>
             {
-                new Product { Id = 1, Name = "Ноутбук Dell XPS 15", Price = 45000, Quantity = 5 },
-                new Product { Id = 2, Name = "Мишка Logitech G Pro", Price = 3500, Quantity = 12 },
-                new Product { Id = 3, Name = "Клавіатура Keychron K2", Price = 4200, Quantity = 8 }
-            };
+                if (obj is Product product)
+                {
+                    Products.Remove(product);
+                    // Оновлюємо файл JSON після видалення
+                    ProductService.SaveProducts(Products.ToList());
+                }
+            });
         }
     }
 }
