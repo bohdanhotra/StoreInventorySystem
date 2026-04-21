@@ -51,6 +51,9 @@
                     <Button Content="{DynamicResource str_Nav_Settings}"
                             Click="NavSettings_Click"
                             Style="{StaticResource SidebarButtonStyle}"/>
+                    <Button Content="{DynamicResource str_Nav_About}"
+                            Click="NavAbout_Click"
+                            Style="{StaticResource SidebarButtonStyle}"/>
                 </StackPanel>
 
             </DockPanel>

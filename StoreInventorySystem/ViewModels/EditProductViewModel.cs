@@ -11,40 +11,48 @@ using StoreInventorySystem.Services;
 
 namespace StoreInventorySystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel сторінки редагування існуючого товару.
+    /// Отримує копію товару, дозволяє змінити поля та зберігає результат.
+    /// </summary>
     public class EditProductViewModel : INotifyPropertyChanged
     {
-        // Оригінальний Id товару для знаходження у списку
         private readonly string _originalId;
-
         private Product _product;
+        private string _errorMessage;
+
+        /// <summary>Редагована копія товару (не змінює оригінал до збереження).</summary>
         public Product Product
         {
             get => _product;
             set { _product = value; OnPropertyChanged(); }
         }
 
-        private string _errorMessage;
+        /// <summary>Повідомлення про помилку валідації.</summary>
         public string ErrorMessage
         {
             get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        // Список категорій для ComboBox
+        /// <summary>Список доступних категорій для ComboBox.</summary>
         public ObservableCollection<string> CategoryList { get; } = new ObservableCollection<string>
         {
             "Електроніка", "Одяг", "Продукти", "Побутова хімія",
             "Інструменти", "Спорт", "Книги", "Інше"
         };
 
+        /// <summary>Команда відкриття діалогу вибору нового зображення.</summary>
         public ICommand SelectImageCommand { get; }
+
+        /// <summary>Команда збереження змін та повернення на список товарів.</summary>
         public ICommand SaveCommand { get; }
 
+        /// <param name="productToEdit">Товар, що потрібно відредагувати.</param>
         public EditProductViewModel(Product productToEdit)
         {
             _originalId = productToEdit.Id;
 
-            // Робимо копію об'єкта щоб не змінювати оригінал до збереження
             Product = new Product
             {
                 Id          = productToEdit.Id,
@@ -56,7 +64,6 @@ namespace StoreInventorySystem.ViewModels
                 ImagePath   = productToEdit.ImagePath
             };
 
-            // Вибір нового зображення
             SelectImageCommand = new RelayCommand(_ =>
             {
                 var dlg = new OpenFileDialog
@@ -67,10 +74,8 @@ namespace StoreInventorySystem.ViewModels
                     Product.ImagePath = dlg.FileName;
             });
 
-            // Збереження змін
             SaveCommand = new RelayCommand(_ =>
             {
-                // Валідація
                 if (string.IsNullOrWhiteSpace(Product.Name))
                 {
                     ErrorMessage = "Введіть назву товару!";
@@ -94,14 +99,12 @@ namespace StoreInventorySystem.ViewModels
 
                 ErrorMessage = "";
 
-                // Копіюємо нову картинку якщо шлях не є абсолютним (вже скопійований)
                 if (!string.IsNullOrEmpty(Product.ImagePath) &&
                     !Product.ImagePath.StartsWith(AppDomain.CurrentDomain.BaseDirectory))
                 {
                     Product.ImagePath = ProductService.SaveImage(Product.ImagePath);
                 }
 
-                // Знаходимо та оновлюємо товар у списку
                 var products = ProductService.LoadProducts();
                 var existing = products.FirstOrDefault(p => p.Id == _originalId);
                 if (existing != null)
@@ -119,7 +122,6 @@ namespace StoreInventorySystem.ViewModels
                 MessageBox.Show("Товар успішно оновлено!", "Збереження",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Повертаємось на список товарів
                 var mainWindow = Application.Current.MainWindow as MainWindow;
                 var dashboard = mainWindow?.MainFrame.Content as Views.MainDashboardPage;
                 dashboard?.ContentFrame.Navigate(new Views.InventoryPage());

@@ -5,9 +5,13 @@ using StoreInventorySystem.Models;
 
 namespace StoreInventorySystem.Services
 {
+    /// <summary>
+    /// Статичний сервіс для роботи з каталогом товарів.
+    /// Читає та записує products.json, копіює зображення у папку ProductImages,
+    /// надає метод експорту у CSV.
+    /// </summary>
     public static class ProductService
     {
-        // Зберігаємо файли поряд із exe, а не у поточній директорії
         private static readonly string FilePath =
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "products.json");
 
@@ -16,11 +20,11 @@ namespace StoreInventorySystem.Services
 
         static ProductService()
         {
-            // Створюємо папку для картинок якщо нема
             if (!Directory.Exists(ImageFolder))
                 Directory.CreateDirectory(ImageFolder);
         }
 
+        /// <summary>Завантажує список товарів із JSON-файлу.</summary>
         public static List<Product> LoadProducts()
         {
             if (!File.Exists(FilePath)) return new List<Product>();
@@ -35,13 +39,17 @@ namespace StoreInventorySystem.Services
             }
         }
 
+        /// <summary>Зберігає список товарів у JSON-файл.</summary>
         public static void SaveProducts(List<Product> products)
         {
             string json = JsonSerializer.Serialize(products, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(FilePath, json);
         }
 
-        // Копіює картинку в папку програми та повертає новий шлях
+        /// <summary>
+        /// Копіює зображення товару в папку ProductImages і повертає новий шлях.
+        /// Повертає null якщо файл не знайдено або шлях порожній.
+        /// </summary>
         public static string SaveImage(string sourcePath)
         {
             if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
@@ -54,7 +62,10 @@ namespace StoreInventorySystem.Services
             return destPath;
         }
 
-        // Експорт у CSV
+        /// <summary>
+        /// Експортує список товарів у CSV-файл із заголовком.
+        /// Поля з комами або лапками екрануються відповідно до стандарту RFC 4180.
+        /// </summary>
         public static void ExportToCsv(List<Product> products, string csvPath)
         {
             var lines = new List<string>();
@@ -62,7 +73,6 @@ namespace StoreInventorySystem.Services
 
             foreach (var p in products)
             {
-                // Екрануємо поля з комою чи лапками
                 string line = $"{p.Id},{Escape(p.Name)},{Escape(p.Category)},{p.Price},{p.Quantity},{Escape(p.Description)}";
                 lines.Add(line);
             }

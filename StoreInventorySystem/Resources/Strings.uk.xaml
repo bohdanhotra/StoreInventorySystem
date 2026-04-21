@@ -40,6 +40,7 @@
     <s:String x:Key="str_Nav_AddProduct" xmlns:s="clr-namespace:System;assembly=mscorlib">➕  Додати товар</s:String>
     <s:String x:Key="str_Nav_Settings" xmlns:s="clr-namespace:System;assembly=mscorlib">⚙️  Налаштування</s:String>
     <s:String x:Key="str_Nav_Logout" xmlns:s="clr-namespace:System;assembly=mscorlib">🚪  Вийти</s:String>
+    <s:String x:Key="str_Nav_About" xmlns:s="clr-namespace:System;assembly=mscorlib">ℹ️  Про програму</s:String>
 
     <!-- HomePage -->
     <s:String x:Key="str_Home_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Головна</s:String>
@@ -84,5 +85,21 @@
     <s:String x:Key="str_Settings_LightTheme" xmlns:s="clr-namespace:System;assembly=mscorlib">Світла</s:String>
     <s:String x:Key="str_Settings_DarkTheme" xmlns:s="clr-namespace:System;assembly=mscorlib">Темна</s:String>
     <s:String x:Key="str_Settings_Saved" xmlns:s="clr-namespace:System;assembly=mscorlib">Налаштування збережено!</s:String>
+
+    <!-- AboutPage -->
+    <s:String x:Key="str_About_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Про програму</s:String>
+    <s:String x:Key="str_About_AppName" xmlns:s="clr-namespace:System;assembly=mscorlib">Система обліку товарів у магазині</s:String>
+    <s:String x:Key="str_About_Version" xmlns:s="clr-namespace:System;assembly=mscorlib">Версія: 1.0.0</s:String>
+    <s:String x:Key="str_About_Stack" xmlns:s="clr-namespace:System;assembly=mscorlib">Технологічний стек</s:String>
+    <s:String x:Key="str_About_StackValue" xmlns:s="clr-namespace:System;assembly=mscorlib">WPF · C# · .NET 8 · MVVM · JSON</s:String>
+    <s:String x:Key="str_About_Description" xmlns:s="clr-namespace:System;assembly=mscorlib">Опрацьовано як навчальний проєкт з дисципліни ОПАМ. Система дозволяє зберігати та керувати каталогом товарів: додавати, редагувати та видаляти позиції, шукати та фільтрувати за категорією, а також імпортувати дані у CSV-файл.</s:String>
+    <s:String x:Key="str_About_Features" xmlns:s="clr-namespace:System;assembly=mscorlib">Можливості</s:String>
+    <s:String x:Key="str_About_F1" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Авторизація та реєстрація з хешуванням пароля</s:String>
+    <s:String x:Key="str_About_F2" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  CRUD-операції над товарами (створення, перегляд, редагування, видалення)</s:String>
+    <s:String x:Key="str_About_F3" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Пошук та фільтрація за категорією</s:String>
+    <s:String x:Key="str_About_F4" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Збереження даних у JSON-файлах</s:String>
+    <s:String x:Key="str_About_F5" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Експорт у CSV</s:String>
+    <s:String x:Key="str_About_F6" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Локалізація: українська та англійська мови</s:String>
+    <s:String x:Key="str_About_F7" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Світла та темна тема оформлення</s:String>
 
 </ResourceDictionary>

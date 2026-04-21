@@ -1,9 +1,15 @@
 namespace StoreInventorySystem.Models
 {
-    // Клас для зберігання налаштувань програми
+    /// <summary>
+    /// Налаштування програми, що зберігаються між сеансами.
+    /// Серіалізуються у файл settings.json.
+    /// </summary>
     public class AppSettings
     {
-        public string Language { get; set; } = "uk";   // "uk" або "en"
-        public string Theme { get; set; } = "Light";   // "Light" або "Dark"
+        /// <summary>Код мови інтерфейсу: "uk" або "en".</summary>
+        public string Language { get; set; } = "uk";
+
+        /// <summary>Назва теми оформлення: "Light" або "Dark".</summary>
+        public string Theme { get; set; } = "Light";
     }
 }

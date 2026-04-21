@@ -7,31 +7,40 @@ using StoreInventorySystem.Services;
 
 namespace StoreInventorySystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel сторінки налаштувань програми.
+    /// Дозволяє змінити мову інтерфейсу та тему оформлення
+    /// із збереженням у файл settings.json.
+    /// </summary>
     public class SettingsViewModel : INotifyPropertyChanged
     {
         private AppSettings _settings;
-
         private string _selectedLanguage;
+        private string _selectedTheme;
+        private string _statusMessage;
+
+        /// <summary>Вибраний код мови: "uk" або "en".</summary>
         public string SelectedLanguage
         {
             get => _selectedLanguage;
             set { _selectedLanguage = value; OnPropertyChanged(); }
         }
 
-        private string _selectedTheme;
+        /// <summary>Вибрана тема: "Light" або "Dark".</summary>
         public string SelectedTheme
         {
             get => _selectedTheme;
             set { _selectedTheme = value; OnPropertyChanged(); }
         }
 
-        private string _statusMessage;
+        /// <summary>Статусне повідомлення після збереження.</summary>
         public string StatusMessage
         {
             get => _statusMessage;
             set { _statusMessage = value; OnPropertyChanged(); }
         }
 
+        /// <summary>Команда збереження налаштувань та їх негайного застосування.</summary>
         public ICommand SaveCommand { get; }
 
         public SettingsViewModel()
@@ -45,13 +54,10 @@ namespace StoreInventorySystem.ViewModels
                 _settings.Language = SelectedLanguage;
                 _settings.Theme    = SelectedTheme;
 
-                // Застосовуємо тему та мову одразу
                 App.ApplyTheme(SelectedTheme);
                 App.ApplyLanguage(SelectedLanguage);
 
-                // Зберігаємо у файл
                 SettingsService.Save(_settings);
-
                 StatusMessage = "Налаштування збережено!";
             });
         }

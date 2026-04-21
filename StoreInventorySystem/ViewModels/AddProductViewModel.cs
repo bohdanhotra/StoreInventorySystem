@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -11,36 +10,44 @@ using StoreInventorySystem.Services;
 
 namespace StoreInventorySystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel сторінки додавання нового товару.
+    /// Виконує валідацію полів, збереження картинки та запис у JSON.
+    /// </summary>
     public class AddProductViewModel : INotifyPropertyChanged
     {
         private Product _newProduct = new Product();
+        private string _errorMessage;
+
+        /// <summary>Новий товар, що заповнюється у формі.</summary>
         public Product NewProduct
         {
             get => _newProduct;
             set { _newProduct = value; OnPropertyChanged(); }
         }
 
-        // Повідомлення про помилку для відображення у View
-        private string _errorMessage;
+        /// <summary>Повідомлення про помилку валідації форми.</summary>
         public string ErrorMessage
         {
             get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        // Список категорій для ComboBox
+        /// <summary>Список доступних категорій для ComboBox.</summary>
         public ObservableCollection<string> CategoryList { get; } = new ObservableCollection<string>
         {
             "Електроніка", "Одяг", "Продукти", "Побутова хімія",
             "Інструменти", "Спорт", "Книги", "Інше"
         };
 
+        /// <summary>Команда відкриття діалогу вибору зображення.</summary>
         public ICommand SelectImageCommand { get; }
+
+        /// <summary>Команда збереження нового товару після валідації.</summary>
         public ICommand SaveCommand { get; }
 
         public AddProductViewModel()
         {
-            // Вибір картинки через діалог
             SelectImageCommand = new RelayCommand(_ =>
             {
                 var dlg = new OpenFileDialog
@@ -51,10 +58,8 @@ namespace StoreInventorySystem.ViewModels
                     NewProduct.ImagePath = dlg.FileName;
             });
 
-            // Збереження товару
             SaveCommand = new RelayCommand(_ =>
             {
-                // Валідація
                 if (string.IsNullOrWhiteSpace(NewProduct.Name))
                 {
                     ErrorMessage = "Введіть назву товару!";
@@ -80,7 +85,6 @@ namespace StoreInventorySystem.ViewModels
 
                 var products = ProductService.LoadProducts();
 
-                // Копіюємо картинку у папку програми
                 if (!string.IsNullOrEmpty(NewProduct.ImagePath))
                     NewProduct.ImagePath = ProductService.SaveImage(NewProduct.ImagePath);
 
@@ -91,7 +95,6 @@ namespace StoreInventorySystem.ViewModels
                 MessageBox.Show("Товар успішно збережено!", "Збереження",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Скидаємо форму після збереження
                 NewProduct = new Product();
             });
         }

@@ -7,24 +7,33 @@ using StoreInventorySystem.Services;
 
 namespace StoreInventorySystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel сторінки входу. Обробляє авторизацію користувача
+    /// та навігацію на панель керування або сторінку реєстрації.
+    /// </summary>
     public class LoginViewModel : INotifyPropertyChanged
     {
         private string _username;
+        private string _errorMessage;
+
+        /// <summary>Логін, введений користувачем.</summary>
         public string Username
         {
             get => _username;
             set { _username = value; OnPropertyChanged(); }
         }
 
-        // Властивість для повідомлень про помилку
-        private string _errorMessage;
+        /// <summary>Повідомлення про помилку авторизації.</summary>
         public string ErrorMessage
         {
             get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
+        /// <summary>Команда входу в систему.</summary>
         public ICommand LoginCommand { get; }
+
+        /// <summary>Команда переходу на сторінку реєстрації.</summary>
         public ICommand GoToRegisterCommand { get; }
 
         public LoginViewModel()
@@ -33,7 +42,6 @@ namespace StoreInventorySystem.ViewModels
             GoToRegisterCommand = new RelayCommand(ExecuteGoToRegister);
         }
 
-        // Обробка пароля через parameter (бо PasswordBox не підтримує безпечний DataBinding напряму)
         private void ExecuteLogin(object parameter)
         {
             var passwordBox = parameter as System.Windows.Controls.PasswordBox;
@@ -41,7 +49,6 @@ namespace StoreInventorySystem.ViewModels
 
             if (AuthService.Login(Username, password))
             {
-                // Логіка переходу на HomePage
                 var mainWindow = Application.Current.MainWindow as MainWindow;
                 mainWindow?.NavigateToDashboard();
             }

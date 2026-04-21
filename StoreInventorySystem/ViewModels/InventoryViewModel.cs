@@ -1,5 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,50 +11,49 @@ using StoreInventorySystem.Services;
 
 namespace StoreInventorySystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel сторінки списку товарів.
+    /// Підтримує пошук по назві, фільтрацію по категорії,
+    /// видалення з підтвердженням, редагування та експорт у CSV.
+    /// </summary>
     public class InventoryViewModel : INotifyPropertyChanged
     {
-        // Повна колекція товарів
         private List<Product> _allProducts;
-
-        // Відфільтрована колекція для відображення
         private ObservableCollection<Product> _products;
+        private string _searchText = "";
+        private string _selectedCategory;
+
+        /// <summary>Відфільтрована колекція товарів для відображення в таблиці.</summary>
         public ObservableCollection<Product> Products
         {
             get => _products;
             set { _products = value; OnPropertyChanged(); }
         }
 
-        // Рядок пошуку
-        private string _searchText = "";
+        /// <summary>Рядок пошуку за назвою товару.</summary>
         public string SearchText
         {
             get => _searchText;
-            set
-            {
-                _searchText = value;
-                OnPropertyChanged();
-                ApplyFilter();
-            }
+            set { _searchText = value; OnPropertyChanged(); ApplyFilter(); }
         }
 
-        // Вибрана категорія для фільтру
-        private string _selectedCategory;
+        /// <summary>Вибрана категорія для фільтрації (порожній рядок = усі).</summary>
         public string SelectedCategory
         {
             get => _selectedCategory;
-            set
-            {
-                _selectedCategory = value;
-                OnPropertyChanged();
-                ApplyFilter();
-            }
+            set { _selectedCategory = value; OnPropertyChanged(); ApplyFilter(); }
         }
 
-        // Список категорій для ComboBox (+ "Всі категорії")
+        /// <summary>Список доступних категорій для ComboBox фільтру.</summary>
         public ObservableCollection<string> Categories { get; set; }
 
+        /// <summary>Команда видалення товару (з діалогом підтвердження).</summary>
         public ICommand DeleteCommand { get; }
+
+        /// <summary>Команда переходу на сторінку редагування товару.</summary>
         public ICommand EditCommand { get; }
+
+        /// <summary>Команда експорту поточного списку товарів у CSV-файл.</summary>
         public ICommand ExportCsvCommand { get; }
 
         public InventoryViewModel()
@@ -62,17 +61,16 @@ namespace StoreInventorySystem.ViewModels
             _allProducts = ProductService.LoadProducts();
             Products = new ObservableCollection<Product>(_allProducts);
 
-            // Збираємо унікальні категорії
-            var cats = _allProducts.Select(p => p.Category)
-                                   .Where(c => !string.IsNullOrEmpty(c))
-                                   .Distinct()
-                                   .OrderBy(c => c)
-                                   .ToList();
-            cats.Insert(0, ""); // "" = всі категорії
+            var cats = _allProducts
+                .Select(p => p.Category)
+                .Where(c => !string.IsNullOrEmpty(c))
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+            cats.Insert(0, "");
             Categories = new ObservableCollection<string>(cats);
             SelectedCategory = "";
 
-            // Команда видалення з підтвердженням
             DeleteCommand = new RelayCommand(obj =>
             {
                 if (obj is not Product product) return;
@@ -91,17 +89,14 @@ namespace StoreInventorySystem.ViewModels
                 }
             });
 
-            // Команда редагування — навігація на EditProductPage
             EditCommand = new RelayCommand(obj =>
             {
                 if (obj is not Product product) return;
                 var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
-                // Знаходимо Frame dashboardу через MainDashboardPage
                 var dashboard = mainWindow?.MainFrame.Content as Views.MainDashboardPage;
                 dashboard?.ContentFrame.Navigate(new Views.EditProductPage(product));
             });
 
-            // Команда експорту CSV
             ExportCsvCommand = new RelayCommand(_ =>
             {
                 var dlg = new SaveFileDialog
@@ -118,7 +113,9 @@ namespace StoreInventorySystem.ViewModels
             });
         }
 
-        // Фільтрація за пошуком та категорією
+        /// <summary>
+        /// Фільтрує список товарів за текстом пошуку та вибраною категорією.
+        /// </summary>
         private void ApplyFilter()
         {
             var filtered = _allProducts.AsEnumerable();

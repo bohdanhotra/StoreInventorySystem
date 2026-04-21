@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,30 +9,41 @@ using StoreInventorySystem.Views;
 
 namespace StoreInventorySystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel сторінки реєстрації. Перевіряє введені дані,
+    /// створює новий акаунт і показує результат операції.
+    /// </summary>
     public class RegisterViewModel : INotifyPropertyChanged
     {
         private string _username;
+        private string _errorMessage;
+        private string _successMessage;
+
+        /// <summary>Логін нового користувача.</summary>
         public string Username
         {
             get => _username;
             set { _username = value; OnPropertyChanged(); }
         }
 
-        private string _errorMessage;
+        /// <summary>Повідомлення про помилку валідації або реєстрації.</summary>
         public string ErrorMessage
         {
             get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        private string _successMessage;
+        /// <summary>Повідомлення про успішну реєстрацію.</summary>
         public string SuccessMessage
         {
             get => _successMessage;
             set { _successMessage = value; OnPropertyChanged(); }
         }
 
+        /// <summary>Команда реєстрації нового акаунту.</summary>
         public ICommand RegisterCommand { get; }
+
+        /// <summary>Команда переходу назад на сторінку входу.</summary>
         public ICommand GoToLoginCommand { get; }
 
         public RegisterViewModel()

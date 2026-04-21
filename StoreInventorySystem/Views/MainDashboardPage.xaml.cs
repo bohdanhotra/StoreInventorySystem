@@ -4,17 +4,17 @@ using StoreInventorySystem.Services;
 
 namespace StoreInventorySystem.Views
 {
+    /// <summary>
+    /// Головна панель керування з бічним меню навігації.
+    /// Містить Frame для відображення піднавігаційних сторінок.
+    /// </summary>
     public partial class MainDashboardPage : Page
     {
         public MainDashboardPage()
         {
             InitializeComponent();
-
-            // Показуємо ім'я та роль поточного користувача
             UserNameText.Text = AuthService.CurrentUser?.Username ?? "Користувач";
             UserRoleText.Text = AuthService.CurrentUser?.Role ?? "";
-
-            // За замовчуванням відкриваємо головну сторінку
             ContentFrame.Navigate(new HomePage());
         }
 
@@ -38,10 +38,14 @@ namespace StoreInventorySystem.Views
             ContentFrame.Navigate(new SettingsPage());
         }
 
+        private void NavAbout_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new AboutPage());
+        }
+
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             AuthService.Logout();
-            // Повертаємось на сторінку входу
             var mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow?.MainFrame.Navigate(new WelcomePage());
         }

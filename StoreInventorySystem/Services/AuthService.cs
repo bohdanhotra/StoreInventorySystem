@@ -8,17 +8,21 @@ using StoreInventorySystem.Models;
 
 namespace StoreInventorySystem.Services
 {
+    /// <summary>
+    /// Статичний сервіс авторизації та реєстрації користувачів.
+    /// Зберігає облікові дані у файлі users.json поряд з виконуваним файлом.
+    /// Паролі зберігаються у вигляді SHA-256 хешу.
+    /// </summary>
     public static class AuthService
     {
-        // Зберігаємо users.json поряд із exe
         private static readonly string FilePath =
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "users.json");
 
         private static List<User> _users = LoadUsers();
 
+        /// <summary>Поточний авторизований користувач (null якщо не увійшов).</summary>
         public static User CurrentUser { get; private set; }
 
-        // Завантаження з JSON
         private static List<User> LoadUsers()
         {
             if (!File.Exists(FilePath)) return new List<User>();
@@ -30,14 +34,15 @@ namespace StoreInventorySystem.Services
             catch { return new List<User>(); }
         }
 
-        // Збереження у JSON
         private static void SaveUsers()
         {
             string json = JsonSerializer.Serialize(_users, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(FilePath, json);
         }
 
-        // Хешування пароля SHA256
+        /// <summary>
+        /// Обчислює SHA-256 хеш пароля у форматі Base64.
+        /// </summary>
         private static string HashPassword(string password)
         {
             using var sha256 = SHA256.Create();
@@ -45,6 +50,10 @@ namespace StoreInventorySystem.Services
             return Convert.ToBase64String(bytes);
         }
 
+        /// <summary>
+        /// Перевіряє облікові дані та встановлює CurrentUser при успіху.
+        /// </summary>
+        /// <returns>true — якщо авторизація успішна.</returns>
         public static bool Login(string username, string password)
         {
             string hash = HashPassword(password);
@@ -57,21 +66,26 @@ namespace StoreInventorySystem.Services
             return false;
         }
 
+        /// <summary>Скидає поточного користувача (вихід з системи).</summary>
         public static void Logout()
         {
             CurrentUser = null;
         }
 
+        /// <summary>
+        /// Реєструє нового користувача з роллю Manager.
+        /// </summary>
+        /// <returns>true — якщо реєстрація успішна (логін ще не зайнятий).</returns>
         public static bool Register(string username, string password)
         {
             if (_users.Any(u => u.Username == username)) return false;
 
             _users.Add(new User
             {
-                Id = _users.Count + 1,
+                Id       = _users.Count + 1,
                 Username = username,
-                Password = HashPassword(password), // Зберігаємо хеш, не пароль
-                Role = "Manager"
+                Password = HashPassword(password),
+                Role     = "Manager"
             });
 
             SaveUsers();

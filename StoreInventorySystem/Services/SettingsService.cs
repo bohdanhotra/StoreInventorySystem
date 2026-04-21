@@ -4,12 +4,16 @@ using StoreInventorySystem.Models;
 
 namespace StoreInventorySystem.Services
 {
+    /// <summary>
+    /// Сервіс збереження та завантаження налаштувань програми.
+    /// Зберігає файл settings.json поряд з виконуваним файлом.
+    /// </summary>
     public static class SettingsService
     {
-        // Зберігаємо файл поряд із exe
         private static readonly string FilePath =
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.json");
 
+        /// <summary>Завантажує налаштування з файлу або повертає значення за замовчуванням.</summary>
         public static AppSettings Load()
         {
             if (!File.Exists(FilePath)) return new AppSettings();
@@ -24,6 +28,7 @@ namespace StoreInventorySystem.Services
             }
         }
 
+        /// <summary>Зберігає налаштування у файл settings.json.</summary>
         public static void Save(AppSettings settings)
         {
             string json = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });

@@ -2,9 +2,16 @@ using System.Windows;
 
 namespace StoreInventorySystem
 {
+    /// <summary>
+    /// Точка входу застосунку. Відповідає за завантаження ресурсів,
+    /// перемикання теми та мови інтерфейсу.
+    /// </summary>
     public partial class App : Application
     {
-        // Перемикання теми
+        /// <summary>
+        /// Застосовує тему оформлення, замінюючи перший словник ресурсів.
+        /// </summary>
+        /// <param name="themeName">"Light" або "Dark".</param>
         public static void ApplyTheme(string themeName)
         {
             var dict = new ResourceDictionary();
@@ -13,12 +20,13 @@ namespace StoreInventorySystem
             else
                 dict.Source = new Uri("Resources/LightTheme.xaml", UriKind.Relative);
 
-            // Замінюємо перший словник (тему) у MergedDictionaries
-            var merged = Current.Resources.MergedDictionaries;
-            merged[0] = dict;
+            Current.Resources.MergedDictionaries[0] = dict;
         }
 
-        // Перемикання мови
+        /// <summary>
+        /// Застосовує мову інтерфейсу, замінюючи другий словник ресурсів.
+        /// </summary>
+        /// <param name="langCode">"uk" або "en".</param>
         public static void ApplyLanguage(string langCode)
         {
             var dict = new ResourceDictionary();
@@ -27,9 +35,7 @@ namespace StoreInventorySystem
             else
                 dict.Source = new Uri("Resources/Strings.uk.xaml", UriKind.Relative);
 
-            // Замінюємо другий словник (локалізацію) у MergedDictionaries
-            var merged = Current.Resources.MergedDictionaries;
-            merged[1] = dict;
+            Current.Resources.MergedDictionaries[1] = dict;
         }
     }
 }

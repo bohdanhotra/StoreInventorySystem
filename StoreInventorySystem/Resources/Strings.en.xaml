@@ -40,6 +40,7 @@
     <s:String x:Key="str_Nav_AddProduct" xmlns:s="clr-namespace:System;assembly=mscorlib">➕  Add Product</s:String>
     <s:String x:Key="str_Nav_Settings" xmlns:s="clr-namespace:System;assembly=mscorlib">⚙️  Settings</s:String>
     <s:String x:Key="str_Nav_Logout" xmlns:s="clr-namespace:System;assembly=mscorlib">🚪  Logout</s:String>
+    <s:String x:Key="str_Nav_About" xmlns:s="clr-namespace:System;assembly=mscorlib">ℹ️  About</s:String>
 
     <!-- HomePage -->
     <s:String x:Key="str_Home_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Dashboard</s:String>
@@ -84,5 +85,21 @@
     <s:String x:Key="str_Settings_LightTheme" xmlns:s="clr-namespace:System;assembly=mscorlib">Light</s:String>
     <s:String x:Key="str_Settings_DarkTheme" xmlns:s="clr-namespace:System;assembly=mscorlib">Dark</s:String>
     <s:String x:Key="str_Settings_Saved" xmlns:s="clr-namespace:System;assembly=mscorlib">Settings saved!</s:String>
+
+    <!-- AboutPage -->
+    <s:String x:Key="str_About_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">About</s:String>
+    <s:String x:Key="str_About_AppName" xmlns:s="clr-namespace:System;assembly=mscorlib">Store Inventory System</s:String>
+    <s:String x:Key="str_About_Version" xmlns:s="clr-namespace:System;assembly=mscorlib">Version: 1.0.0</s:String>
+    <s:String x:Key="str_About_Stack" xmlns:s="clr-namespace:System;assembly=mscorlib">Technology Stack</s:String>
+    <s:String x:Key="str_About_StackValue" xmlns:s="clr-namespace:System;assembly=mscorlib">WPF · C# · .NET 8 · MVVM · JSON</s:String>
+    <s:String x:Key="str_About_Description" xmlns:s="clr-namespace:System;assembly=mscorlib">Developed as an academic project for the OPAM discipline. The system allows storing and managing a product catalog: add, edit and delete items, search and filter by category, and export data to a CSV file.</s:String>
+    <s:String x:Key="str_About_Features" xmlns:s="clr-namespace:System;assembly=mscorlib">Features</s:String>
+    <s:String x:Key="str_About_F1" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Authentication and registration with password hashing</s:String>
+    <s:String x:Key="str_About_F2" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Full CRUD operations (create, read, update, delete)</s:String>
+    <s:String x:Key="str_About_F3" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Search and filter by category</s:String>
+    <s:String x:Key="str_About_F4" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Data persistence via JSON files</s:String>
+    <s:String x:Key="str_About_F5" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Export to CSV</s:String>
+    <s:String x:Key="str_About_F6" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Localization: Ukrainian and English</s:String>
+    <s:String x:Key="str_About_F7" xmlns:s="clr-namespace:System;assembly=mscorlib">✔  Light and dark themes</s:String>
 
 </ResourceDictionary>

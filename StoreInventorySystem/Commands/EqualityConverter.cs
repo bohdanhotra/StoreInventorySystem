@@ -1,10 +1,14 @@
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace StoreInventorySystem.Commands
 {
-    // Конвертер для прив'язки RadioButton до рядкової властивості
-    // Повертає true якщо значення == параметр
+    /// <summary>
+    /// Конвертер для прив'язки RadioButton до рядкової властивості у ViewModel.
+    /// Повертає true якщо значення збігається з ConverterParameter.
+    /// При зворотньому перетворенні повертає значення параметра якщо RadioButton активний.
+    /// </summary>
     public class EqualityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -14,7 +18,6 @@ namespace StoreInventorySystem.Commands
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // Якщо RadioButton виставлений в true, повертаємо значення параметра
             if (value is bool b && b)
                 return parameter?.ToString();
             return Binding.DoNothing;
