@@ -1,10 +1,15 @@
-﻿<Application x:Class="StoreInventorySystem.App"
+<Application x:Class="StoreInventorySystem.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Тема (за замовчуванням — світла) -->
+                <ResourceDictionary Source="Resources/LightTheme.xaml"/>
+                <!-- Локалізація (за замовчуванням — українська) -->
+                <ResourceDictionary Source="Resources/Strings.uk.xaml"/>
+                <!-- Всі стилі -->
                 <ResourceDictionary Source="Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

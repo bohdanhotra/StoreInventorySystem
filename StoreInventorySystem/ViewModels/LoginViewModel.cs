@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -43,7 +43,7 @@ namespace StoreInventorySystem.ViewModels
             {
                 // Логіка переходу на HomePage
                 var mainWindow = Application.Current.MainWindow as MainWindow;
-                mainWindow?.NavigateToHome();
+                mainWindow?.NavigateToDashboard();
             }
             else
             {

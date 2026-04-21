@@ -1,16 +1,16 @@
-<Page x:Class="StoreInventorySystem.Views.AddProductPage"
+<Page x:Class="StoreInventorySystem.Views.EditProductPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Новий товар">
+      Title="Редагування товару">
 
     <ScrollViewer Background="{DynamicResource BackgroundBrush}">
         <StackPanel Margin="30" MaxWidth="520">
 
-            <TextBlock Text="{DynamicResource str_Add_Title}"
+            <TextBlock Text="{DynamicResource str_Edit_Title}"
                        Style="{StaticResource HeaderTextStyle}"/>
 
             <Border Background="{DynamicResource SurfaceBrush}"
-                    CornerRadius="10" Padding="24">
+                    CornerRadius="10" Padding="24" Margin="0,0,0,0">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.08"/>
                 </Border.Effect>
@@ -18,39 +18,38 @@
 
                     <!-- Назва -->
                     <Label Content="{DynamicResource str_Add_Name}"/>
-                    <TextBox Text="{Binding NewProduct.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Text="{Binding Product.Name, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <!-- Категорія -->
                     <Label Content="{DynamicResource str_Add_Category}"/>
                     <ComboBox ItemsSource="{Binding CategoryList}"
-                              SelectedItem="{Binding NewProduct.Category}"/>
+                              SelectedItem="{Binding Product.Category}"/>
 
                     <!-- Ціна -->
                     <Label Content="{DynamicResource str_Add_Price}"/>
-                    <TextBox Text="{Binding NewProduct.Price, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Text="{Binding Product.Price, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <!-- Кількість -->
                     <Label Content="{DynamicResource str_Add_Qty}"/>
-                    <TextBox Text="{Binding NewProduct.Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Text="{Binding Product.Quantity, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <!-- Опис -->
                     <Label Content="{DynamicResource str_Add_Description}"/>
-                    <TextBox Text="{Binding NewProduct.Description, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding Product.Description, UpdateSourceTrigger=PropertyChanged}"
                              AcceptsReturn="True" Height="70" TextWrapping="Wrap"/>
 
                     <!-- Зображення -->
                     <Label Content="{DynamicResource str_Add_Image}"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="{DynamicResource str_Add_SelectImage}"
-                                Command="{Binding SelectImageCommand}"
-                                Width="150" Margin="0"/>
-                        <TextBlock Text="{Binding NewProduct.ImagePath}"
+                                Command="{Binding SelectImageCommand}" Width="150"/>
+                        <TextBlock Text="{Binding Product.ImagePath}"
                                    VerticalAlignment="Center" Margin="10,0,0,0"
                                    Foreground="{DynamicResource SubTextBrush}"
-                                   TextTrimming="CharacterEllipsis" MaxWidth="260"/>
+                                   TextTrimming="CharacterEllipsis" MaxWidth="250"/>
                     </StackPanel>
-                    <Image Source="{Binding NewProduct.ImagePath}" Height="120"
-                           HorizontalAlignment="Left" Margin="0,0,0,12" Stretch="UniformToFill"/>
+                    <Image Source="{Binding Product.ImagePath}" Height="120"
+                           HorizontalAlignment="Left" Margin="0,0,0,10" Stretch="UniformToFill"/>
 
                     <!-- Помилка валідації -->
                     <TextBlock Text="{Binding ErrorMessage}"
@@ -58,10 +57,12 @@
                                FontWeight="SemiBold" Margin="0,4,0,12"
                                TextWrapping="Wrap"/>
 
-                    <!-- Кнопка збереження -->
-                    <Button Content="{DynamicResource str_Add_Save}"
-                            Command="{Binding SaveCommand}"
-                            Height="44" Margin="0,4,0,0"/>
+                    <!-- Кнопки -->
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{DynamicResource str_Edit_Save}"
+                                Command="{Binding SaveCommand}"
+                                Height="42" Width="200"/>
+                    </StackPanel>
 
                 </StackPanel>
             </Border>

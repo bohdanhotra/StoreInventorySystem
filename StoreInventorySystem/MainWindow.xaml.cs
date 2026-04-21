@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using StoreInventorySystem.Views;
 
 namespace StoreInventorySystem
@@ -8,12 +8,20 @@ namespace StoreInventorySystem
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Views.MainDashboardPage()); 
+
+            // Завантажуємо збережені налаштування (тема, мова)
+            var settings = Services.SettingsService.Load();
+            App.ApplyTheme(settings.Theme);
+            App.ApplyLanguage(settings.Language);
+
+            // Стартуємо зі сторінки входу
+            MainFrame.Navigate(new WelcomePage());
         }
 
-        public void NavigateToHome()
+        // Навігація на панель керування після успішного логіну
+        public void NavigateToDashboard()
         {
-            MainFrame.Navigate(new Views.InventoryPage());
+            MainFrame.Navigate(new MainDashboardPage());
         }
     }
 }

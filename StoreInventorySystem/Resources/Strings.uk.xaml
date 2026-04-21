@@ -1,0 +1,88 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Всі рядки інтерфейсу українською -->
+
+    <!-- Загальні -->
+    <s:String x:Key="str_AppTitle" xmlns:s="clr-namespace:System;assembly=mscorlib">Система обліку товарів</s:String>
+    <s:String x:Key="str_Save" xmlns:s="clr-namespace:System;assembly=mscorlib">Зберегти</s:String>
+    <s:String x:Key="str_Cancel" xmlns:s="clr-namespace:System;assembly=mscorlib">Скасувати</s:String>
+    <s:String x:Key="str_Delete" xmlns:s="clr-namespace:System;assembly=mscorlib">Видалити</s:String>
+    <s:String x:Key="str_Edit" xmlns:s="clr-namespace:System;assembly=mscorlib">Редагувати</s:String>
+    <s:String x:Key="str_Actions" xmlns:s="clr-namespace:System;assembly=mscorlib">Дії</s:String>
+    <s:String x:Key="str_Yes" xmlns:s="clr-namespace:System;assembly=mscorlib">Так</s:String>
+    <s:String x:Key="str_No" xmlns:s="clr-namespace:System;assembly=mscorlib">Ні</s:String>
+
+    <!-- WelcomePage -->
+    <s:String x:Key="str_Welcome_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Store Inventory</s:String>
+    <s:String x:Key="str_Welcome_Subtitle" xmlns:s="clr-namespace:System;assembly=mscorlib">Система керування складом</s:String>
+    <s:String x:Key="str_Welcome_Login" xmlns:s="clr-namespace:System;assembly=mscorlib">Увійти</s:String>
+    <s:String x:Key="str_Welcome_Register" xmlns:s="clr-namespace:System;assembly=mscorlib">Створити акаунт</s:String>
+    <s:String x:Key="str_Welcome_Exit" xmlns:s="clr-namespace:System;assembly=mscorlib">Вийти з програми</s:String>
+
+    <!-- LoginPage -->
+    <s:String x:Key="str_Login_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Авторизація</s:String>
+    <s:String x:Key="str_Login_Username" xmlns:s="clr-namespace:System;assembly=mscorlib">Логін:</s:String>
+    <s:String x:Key="str_Login_Password" xmlns:s="clr-namespace:System;assembly=mscorlib">Пароль:</s:String>
+    <s:String x:Key="str_Login_Button" xmlns:s="clr-namespace:System;assembly=mscorlib">Увійти</s:String>
+    <s:String x:Key="str_Login_GoRegister" xmlns:s="clr-namespace:System;assembly=mscorlib">Немає акаунту? Зареєструватися</s:String>
+
+    <!-- RegisterPage -->
+    <s:String x:Key="str_Register_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Реєстрація</s:String>
+    <s:String x:Key="str_Register_Username" xmlns:s="clr-namespace:System;assembly=mscorlib">Новий логін:</s:String>
+    <s:String x:Key="str_Register_Password" xmlns:s="clr-namespace:System;assembly=mscorlib">Пароль:</s:String>
+    <s:String x:Key="str_Register_Button" xmlns:s="clr-namespace:System;assembly=mscorlib">Зареєструватися</s:String>
+    <s:String x:Key="str_Register_GoLogin" xmlns:s="clr-namespace:System;assembly=mscorlib">Вже є акаунт? Увійти</s:String>
+
+    <!-- Sidebar -->
+    <s:String x:Key="str_Nav_Home" xmlns:s="clr-namespace:System;assembly=mscorlib">🏠  Головна</s:String>
+    <s:String x:Key="str_Nav_Inventory" xmlns:s="clr-namespace:System;assembly=mscorlib">📦  Товари</s:String>
+    <s:String x:Key="str_Nav_AddProduct" xmlns:s="clr-namespace:System;assembly=mscorlib">➕  Додати товар</s:String>
+    <s:String x:Key="str_Nav_Settings" xmlns:s="clr-namespace:System;assembly=mscorlib">⚙️  Налаштування</s:String>
+    <s:String x:Key="str_Nav_Logout" xmlns:s="clr-namespace:System;assembly=mscorlib">🚪  Вийти</s:String>
+
+    <!-- HomePage -->
+    <s:String x:Key="str_Home_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Головна</s:String>
+    <s:String x:Key="str_Home_TotalProducts" xmlns:s="clr-namespace:System;assembly=mscorlib">Всього товарів</s:String>
+    <s:String x:Key="str_Home_TotalItems" xmlns:s="clr-namespace:System;assembly=mscorlib">Загальна кількість</s:String>
+    <s:String x:Key="str_Home_TotalValue" xmlns:s="clr-namespace:System;assembly=mscorlib">Загальна вартість</s:String>
+    <s:String x:Key="str_Home_LowStock" xmlns:s="clr-namespace:System;assembly=mscorlib">Мало на складі (&lt;5)</s:String>
+    <s:String x:Key="str_Home_Welcome" xmlns:s="clr-namespace:System;assembly=mscorlib">Вітаємо!</s:String>
+
+    <!-- InventoryPage -->
+    <s:String x:Key="str_Inventory_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Список товарів</s:String>
+    <s:String x:Key="str_Inventory_Search" xmlns:s="clr-namespace:System;assembly=mscorlib">Пошук за назвою...</s:String>
+    <s:String x:Key="str_Inventory_AllCategories" xmlns:s="clr-namespace:System;assembly=mscorlib">Всі категорії</s:String>
+    <s:String x:Key="str_Inventory_ExportCsv" xmlns:s="clr-namespace:System;assembly=mscorlib">Експорт CSV</s:String>
+    <s:String x:Key="str_Col_Photo" xmlns:s="clr-namespace:System;assembly=mscorlib">Фото</s:String>
+    <s:String x:Key="str_Col_Name" xmlns:s="clr-namespace:System;assembly=mscorlib">Назва</s:String>
+    <s:String x:Key="str_Col_Category" xmlns:s="clr-namespace:System;assembly=mscorlib">Категорія</s:String>
+    <s:String x:Key="str_Col_Price" xmlns:s="clr-namespace:System;assembly=mscorlib">Ціна (грн)</s:String>
+    <s:String x:Key="str_Col_Qty" xmlns:s="clr-namespace:System;assembly=mscorlib">К-сть</s:String>
+    <s:String x:Key="str_Delete_Confirm" xmlns:s="clr-namespace:System;assembly=mscorlib">Видалити товар?</s:String>
+    <s:String x:Key="str_Delete_Message" xmlns:s="clr-namespace:System;assembly=mscorlib">Ви впевнені, що хочете видалити цей товар?</s:String>
+
+    <!-- AddProductPage -->
+    <s:String x:Key="str_Add_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Новий товар</s:String>
+    <s:String x:Key="str_Add_Name" xmlns:s="clr-namespace:System;assembly=mscorlib">Назва товару:</s:String>
+    <s:String x:Key="str_Add_Category" xmlns:s="clr-namespace:System;assembly=mscorlib">Категорія:</s:String>
+    <s:String x:Key="str_Add_Price" xmlns:s="clr-namespace:System;assembly=mscorlib">Ціна (грн):</s:String>
+    <s:String x:Key="str_Add_Qty" xmlns:s="clr-namespace:System;assembly=mscorlib">Кількість:</s:String>
+    <s:String x:Key="str_Add_Description" xmlns:s="clr-namespace:System;assembly=mscorlib">Опис:</s:String>
+    <s:String x:Key="str_Add_Image" xmlns:s="clr-namespace:System;assembly=mscorlib">Зображення:</s:String>
+    <s:String x:Key="str_Add_SelectImage" xmlns:s="clr-namespace:System;assembly=mscorlib">Вибрати файл</s:String>
+    <s:String x:Key="str_Add_Save" xmlns:s="clr-namespace:System;assembly=mscorlib">ЗБЕРЕГТИ ТОВАР</s:String>
+
+    <!-- EditProductPage -->
+    <s:String x:Key="str_Edit_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Редагування товару</s:String>
+    <s:String x:Key="str_Edit_Save" xmlns:s="clr-namespace:System;assembly=mscorlib">ЗБЕРЕГТИ ЗМІНИ</s:String>
+
+    <!-- SettingsPage -->
+    <s:String x:Key="str_Settings_Title" xmlns:s="clr-namespace:System;assembly=mscorlib">Налаштування</s:String>
+    <s:String x:Key="str_Settings_Language" xmlns:s="clr-namespace:System;assembly=mscorlib">Мова інтерфейсу</s:String>
+    <s:String x:Key="str_Settings_Theme" xmlns:s="clr-namespace:System;assembly=mscorlib">Тема оформлення</s:String>
+    <s:String x:Key="str_Settings_LightTheme" xmlns:s="clr-namespace:System;assembly=mscorlib">Світла</s:String>
+    <s:String x:Key="str_Settings_DarkTheme" xmlns:s="clr-namespace:System;assembly=mscorlib">Темна</s:String>
+    <s:String x:Key="str_Settings_Saved" xmlns:s="clr-namespace:System;assembly=mscorlib">Налаштування збережено!</s:String>
+
+</ResourceDictionary>

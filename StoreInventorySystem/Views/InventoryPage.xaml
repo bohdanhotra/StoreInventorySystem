@@ -1,41 +1,136 @@
-﻿<Page x:Class="StoreInventorySystem.Views.InventoryPage"
+<Page x:Class="StoreInventorySystem.Views.InventoryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="InventoryPage">
-    <Grid Margin="15">
+      Title="Список товарів">
+
+    <Grid Background="{DynamicResource BackgroundBrush}" Margin="15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Список товарів у наявності" Style="{StaticResource HeaderTextStyle}" Grid.Row="0"/>
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0"
+                   Text="{DynamicResource str_Inventory_Title}"
+                   Style="{StaticResource HeaderTextStyle}"/>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Products}" AutoGenerateColumns="False" 
-          CanUserAddRows="False" IsReadOnly="True" Margin="5">
+        <!-- Панель інструментів: пошук + фільтр + кнопка CSV -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Поле пошуку -->
+            <TextBox Grid.Column="0"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0,0,8,0">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <VisualBrush Stretch="None" AlignmentX="Left">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Text="{DynamicResource str_Inventory_Search}"
+                                                           Foreground="Gray" Margin="8,0,0,0"
+                                                           VerticalAlignment="Center"/>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <!-- Фільтр по категорії -->
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding Categories}"
+                      SelectedItem="{Binding SelectedCategory}"
+                      Margin="0,0,8,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding}" Value="">
+                                            <Setter Property="Text" Value="{DynamicResource str_Inventory_AllCategories}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <!-- Кнопка Export CSV -->
+            <Button Grid.Column="2"
+                    Content="{DynamicResource str_Inventory_ExportCsv}"
+                    Command="{Binding ExportCsvCommand}"
+                    Padding="14,6" Margin="0"/>
+        </Grid>
+
+        <!-- Таблиця товарів -->
+        <DataGrid Grid.Row="2"
+                  ItemsSource="{Binding Products}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Фото" Width="60">
+
+                <!-- Фото -->
+                <DataGridTemplateColumn Header="{DynamicResource str_Col_Photo}" Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImagePath}" Height="40" Width="40" Stretch="UniformToFill"/>
+                            <Image Source="{Binding ImagePath}" Height="40" Width="40"
+                                   Stretch="UniformToFill" Margin="2"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Назва" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Категорія" Binding="{Binding Category}" Width="120"/>
-                <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" Width="80"/>
-                <DataGridTextColumn Header="К-сть" Binding="{Binding Quantity}" Width="70"/>
+                <!-- Назва -->
+                <DataGridTextColumn Header="{DynamicResource str_Col_Name}"
+                                    Binding="{Binding Name}" Width="*"/>
 
-                <DataGridTemplateColumn Header="Дії" Width="100">
+                <!-- Категорія -->
+                <DataGridTextColumn Header="{DynamicResource str_Col_Category}"
+                                    Binding="{Binding Category}" Width="130"/>
+
+                <!-- Ціна -->
+                <DataGridTextColumn Header="{DynamicResource str_Col_Price}"
+                                    Binding="{Binding Price, StringFormat={}{0:N2}}" Width="100"/>
+
+                <!-- Кількість -->
+                <DataGridTextColumn Header="{DynamicResource str_Col_Qty}"
+                                    Binding="{Binding Quantity}" Width="70"/>
+
+                <!-- Дії -->
+                <DataGridTemplateColumn Header="{DynamicResource str_Actions}" Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Видалити" 
-                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
-                            CommandParameter="{Binding}"
-                            Background="Red" Foreground="White" FontSize="10" Height="25"/>
+                            <StackPanel Orientation="Horizontal" Margin="2">
+                                <Button Content="{DynamicResource str_Edit}"
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        Padding="8,4" Margin="0,0,4,0" FontSize="12"/>
+                                <Button Content="{DynamicResource str_Delete}"
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource DangerButtonStyle}"
+                                        Padding="8,4" Margin="0" FontSize="12"/>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

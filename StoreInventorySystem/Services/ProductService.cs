@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -8,19 +7,32 @@ namespace StoreInventorySystem.Services
 {
     public static class ProductService
     {
-        private const string FilePath = "products.json";
-        private const string ImageFolder = "ProductImages";
+        // Зберігаємо файли поряд із exe, а не у поточній директорії
+        private static readonly string FilePath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "products.json");
+
+        private static readonly string ImageFolder =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ProductImages");
 
         static ProductService()
         {
-            if (!Directory.Exists(ImageFolder)) Directory.CreateDirectory(ImageFolder);
+            // Створюємо папку для картинок якщо нема
+            if (!Directory.Exists(ImageFolder))
+                Directory.CreateDirectory(ImageFolder);
         }
 
         public static List<Product> LoadProducts()
         {
             if (!File.Exists(FilePath)) return new List<Product>();
-            string json = File.ReadAllText(FilePath);
-            return JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
+            try
+            {
+                string json = File.ReadAllText(FilePath);
+                return JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
+            }
+            catch
+            {
+                return new List<Product>();
+            }
         }
 
         public static void SaveProducts(List<Product> products)
@@ -29,17 +41,41 @@ namespace StoreInventorySystem.Services
             File.WriteAllText(FilePath, json);
         }
 
-        // Метод для копіювання картинки в папку програми
+        // Копіює картинку в папку програми та повертає новий шлях
         public static string SaveImage(string sourcePath)
         {
-            if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath)) return null;
+            if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
+                return null;
 
-            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(sourcePath);
+            string ext = Path.GetExtension(sourcePath);
+            string fileName = Guid.NewGuid().ToString("N") + ext;
             string destPath = Path.Combine(ImageFolder, fileName);
-            File.Copy(sourcePath, destPath);
+            File.Copy(sourcePath, destPath, overwrite: true);
+            return destPath;
+        }
 
-            // Повертаємо відносний шлях для збереження в JSON
-            return Path.GetFullPath(destPath);
+        // Експорт у CSV
+        public static void ExportToCsv(List<Product> products, string csvPath)
+        {
+            var lines = new List<string>();
+            lines.Add("Id,Name,Category,Price,Quantity,Description");
+
+            foreach (var p in products)
+            {
+                // Екрануємо поля з комою чи лапками
+                string line = $"{p.Id},{Escape(p.Name)},{Escape(p.Category)},{p.Price},{p.Quantity},{Escape(p.Description)}";
+                lines.Add(line);
+            }
+
+            File.WriteAllLines(csvPath, lines, System.Text.Encoding.UTF8);
+        }
+
+        private static string Escape(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return "";
+            if (value.Contains(',') || value.Contains('"'))
+                return $"\"{value.Replace("\"", "\"\"")}\"";
+            return value;
         }
     }
 }
