@@ -5,11 +5,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Тема (за замовчуванням — світла) -->
-                <ResourceDictionary Source="Resources/LightTheme.xaml"/>
-                <!-- Локалізація (за замовчуванням — українська) -->
+                <ResourceDictionary Source="Resources/DarkTheme.xaml"/>
+                
                 <ResourceDictionary Source="Resources/Strings.uk.xaml"/>
-                <!-- Всі стилі -->
+                
+                
+                
                 <ResourceDictionary Source="Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

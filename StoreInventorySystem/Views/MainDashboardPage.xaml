@@ -9,18 +9,19 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Sidebar -->
+        <!-- idebar -->
         <Border Grid.Column="0" Background="{DynamicResource SidebarBrush}">
             <DockPanel>
 
-                <!-- Верхня частина: аватар + роль -->
+                <!--  аватар і роль -->
                 <StackPanel DockPanel.Dock="Top" Margin="16,24,16,8">
                     <Border Background="#22FFFFFF" CornerRadius="40"
                             Width="72" Height="72" HorizontalAlignment="Center" Margin="0,0,0,10">
-                        <TextBlock Text="👤" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="👤" FontSize="36" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <TextBlock x:Name="UserNameText" Text="Користувач"
-                               Foreground="{DynamicResource SidebarTextBrush}"
+                               Foreground="White"
                                HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="14"/>
                     <TextBlock x:Name="UserRoleText" Text="Manager"
                                Foreground="#AAFFFFFF"
@@ -28,19 +29,20 @@
                     <Separator Background="#33FFFFFF" Margin="0,16,0,0"/>
                 </StackPanel>
 
-                <!-- Нижня частина: кнопка Logout -->
+                <!--  кнопка логаут -->
                 <StackPanel DockPanel.Dock="Bottom" Margin="8,0,8,16">
                     <Separator Background="#33FFFFFF" Margin="0,0,0,8"/>
                     <Button Content="{DynamicResource str_Nav_Logout}"
                             Click="Logout_Click"
                             Style="{StaticResource SidebarButtonStyle}"
-                            Foreground="#FFAAAA"/>
+                            Foreground="#AAFFFFFF"/>
                 </StackPanel>
 
-                <!-- Середина: навігаційні кнопки -->
+                <!-- навігація -->
                 <StackPanel Margin="8,0">
                     <Button Content="{DynamicResource str_Nav_Home}"
                             Click="NavHome_Click"
+                            
                             Style="{StaticResource SidebarButtonStyle}"/>
                     <Button Content="{DynamicResource str_Nav_Inventory}"
                             Click="NavInventory_Click"
@@ -59,7 +61,6 @@
             </DockPanel>
         </Border>
 
-        <!-- Контент -->
         <Frame x:Name="ContentFrame" Grid.Column="1"
                NavigationUIVisibility="Hidden"
                Background="{DynamicResource BackgroundBrush}"/>

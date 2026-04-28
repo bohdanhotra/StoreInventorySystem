@@ -9,7 +9,7 @@
             <TextBlock Text="{DynamicResource str_Settings_Title}"
                        Style="{StaticResource HeaderTextStyle}"/>
 
-            <!-- Блок вибору мови -->
+            <!--мови -->
             <Border Background="{DynamicResource SurfaceBrush}"
                     CornerRadius="10" Padding="20" Margin="0,0,0,16">
                 <Border.Effect>
@@ -28,7 +28,7 @@
                 </StackPanel>
             </Border>
 
-            <!-- Блок вибору теми -->
+            <!-- тема -->
             <Border Background="{DynamicResource SurfaceBrush}"
                     CornerRadius="10" Padding="20" Margin="0,0,0,16">
                 <Border.Effect>
@@ -47,14 +47,12 @@
                 </StackPanel>
             </Border>
 
-            <!-- Кнопка зберегти -->
             <Button Content="{DynamicResource str_Save}"
                     Command="{Binding SaveCommand}"
                     Height="45" Width="200"
                     HorizontalAlignment="Left"
                     Margin="0,8,0,12"/>
 
-            <!-- Статусне повідомлення -->
             <TextBlock Text="{Binding StatusMessage}"
                        Foreground="{DynamicResource SuccessBrush}"
                        FontWeight="SemiBold" FontSize="14"/>

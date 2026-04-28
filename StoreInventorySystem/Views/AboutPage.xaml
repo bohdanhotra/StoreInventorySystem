@@ -9,7 +9,7 @@
             <TextBlock Text="{DynamicResource str_About_Title}"
                        Style="{StaticResource HeaderTextStyle}"/>
 
-            <!-- Шапка з назвою та іконкою -->
+            <!-- шапка-->
             <Border Background="{DynamicResource SurfaceBrush}"
                     CornerRadius="12" Padding="28" Margin="0,0,0,16">
                 <Border.Effect>
@@ -54,7 +54,7 @@
                            Foreground="{DynamicResource SubTextBrush}"/>
             </Border>
 
-            <!-- Можливості -->
+            <!-- можливості -->
             <Border Background="{DynamicResource SurfaceBrush}"
                     CornerRadius="12" Padding="24" Margin="0,0,0,16">
                 <Border.Effect>

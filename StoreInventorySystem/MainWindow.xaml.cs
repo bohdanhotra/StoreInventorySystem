@@ -13,7 +13,11 @@ namespace StoreInventorySystem
         {
             InitializeComponent();
 
-           
+            var settings = Services.SettingsService.Load();
+            App.ApplyTheme(settings.Theme);
+            App.ApplyLanguage(settings.Language);
+
+            MainFrame.Navigate(new WelcomePage());
         }
 
         /// <summary>

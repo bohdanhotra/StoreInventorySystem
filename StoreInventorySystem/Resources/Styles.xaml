@@ -4,7 +4,7 @@
 
     <conv:EqualityConverter x:Key="EqualityConverter"/>
 
-    <!-- Звичайна кнопка (синій фон, білий текст) -->
+    <!-- Звичайна кнопка -->
     <Style TargetType="Button">
         <Setter Property="Background"      Value="{DynamicResource PrimaryBrush}"/>
         <Setter Property="Foreground"      Value="White"/>
@@ -40,7 +40,7 @@
         </Setter>
     </Style>
 
-    <!-- Кнопка бічного меню (прозорий фон, текст з теми) -->
+    <!-- Кнопка бічного меню  -->
     <Style x:Key="SidebarButtonStyle" TargetType="Button">
         <Setter Property="Background"                Value="Transparent"/>
         <Setter Property="Foreground"                Value="{DynamicResource SidebarTextBrush}"/>
@@ -57,7 +57,9 @@
                             Background="{TemplateBinding Background}"
                             CornerRadius="8"
                             Padding="{TemplateBinding Padding}">
-                        <!-- TextBlock.Foreground передає колір у ContentPresenter, обходячи глобальний TextBlock стиль -->
+
+                        
+                        
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="Center"
                                           TextBlock.Foreground="{TemplateBinding Foreground}"
@@ -73,7 +75,7 @@
         </Setter>
     </Style>
 
-    <!-- Кнопка небезпечної дії (червоний фон, для видалення) -->
+    <!--для видалення) -->
     <Style x:Key="DangerButtonStyle" TargetType="Button">
         <Setter Property="Background"      Value="#DC2626"/>
         <Setter Property="Foreground"      Value="White"/>
@@ -105,7 +107,7 @@
         </Setter>
     </Style>
 
-    <!-- Поле введення тексту з заокругленими кутами -->
+    <!-- Поле введення тексту -->
     <Style TargetType="TextBox">
         <Setter Property="Padding"         Value="10,0"/>
         <Setter Property="Margin"          Value="0,4,0,10"/>
@@ -124,7 +126,8 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="6">
-                        <!-- VerticalAlignment="Center" щоб текст завжди посередині по висоті -->
+
+                        
                         <ScrollViewer x:Name="PART_ContentHost"
                                       Margin="{TemplateBinding Padding}"
                                       VerticalAlignment="Center"
@@ -145,7 +148,6 @@
         </Setter>
     </Style>
 
-    <!-- Поле введення пароля -->
     <Style TargetType="PasswordBox">
         <Setter Property="Padding"         Value="10,0"/>
         <Setter Property="Margin"          Value="0,4,0,10"/>
@@ -158,7 +160,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <!-- Підпис поля введення -->
     <Style TargetType="Label">
         <Setter Property="FontSize"    Value="14"/>
         <Setter Property="Foreground"  Value="{DynamicResource TextBrush}"/>
@@ -166,7 +167,6 @@
         <Setter Property="Padding"     Value="0"/>
     </Style>
 
-    <!-- Базовий текстовий блок -->
     <Style TargetType="TextBlock">
         <Setter Property="Foreground"  Value="{DynamicResource TextBrush}"/>
         <Setter Property="FontSize"    Value="14"/>
@@ -186,7 +186,7 @@
         <Setter Property="Foreground"  Value="{DynamicResource SubTextBrush}"/>
     </Style>
 
-    <!-- Картка статистики на головній сторінці -->
+    <!-- Картка статистики -->
     <Style x:Key="StatCardStyle" TargetType="Border">
         <Setter Property="Background"  Value="{DynamicResource SurfaceBrush}"/>
         <Setter Property="CornerRadius" Value="10"/>
@@ -199,7 +199,7 @@
         </Setter>
     </Style>
 
-    <!-- Таблиця даних (DataGrid) -->
+    <!-- Таблиця даних -->
     <Style TargetType="DataGrid">
         <Setter Property="Background"               Value="{DynamicResource SurfaceBrush}"/>
         <Setter Property="Foreground"               Value="{DynamicResource TextBrush}"/>
@@ -252,7 +252,7 @@
         </Style.Triggers>
     </Style>
 
-    <!-- Випадаючий список -->
+    <!-- список -->
     <Style TargetType="ComboBox">
         <Setter Property="Padding"         Value="8,6"/>
         <Setter Property="Margin"          Value="0,4,0,10"/>
@@ -264,13 +264,42 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <!-- Смуга прокручування -->
+    <!-- Елемент списку -->
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="Background"    Value="{DynamicResource SurfaceBrush}"/>
+        <Setter Property="Foreground"    Value="{DynamicResource TextBrush}"/>
+        <Setter Property="Padding"       Value="10,7"/>
+        <Setter Property="FontSize"      Value="14"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="bg"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter TextBlock.Foreground="{TemplateBinding Foreground}"
+                                          TextBlock.FontSize="{TemplateBinding FontSize}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- скролл -->
     <Style TargetType="ScrollViewer">
         <Setter Property="VerticalScrollBarVisibility"   Value="Auto"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
     </Style>
 
-    <!-- Роздільна лінія -->
+    <!--Роздільник-->
     <Style TargetType="Separator">
         <Setter Property="Background" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="Margin"     Value="0,8"/>
